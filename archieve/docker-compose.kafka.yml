@@ -1,3 +1,4 @@
+# docker-compose.kafka.yml
 version: "3"
 
 services:
@@ -16,22 +17,8 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
-  generator:
-    build: ./generator
-    environment:
-      KAFKA_BROKER_URL: broker:9092
-      TRANSACTIONS_TOPIC: queueing.transactions
-      TRANSACTIONS_PER_SECOND: 1000
-
-  detector:
-    build: ./detector
-    environment:
-      KAFKA_BROKER_URL: broker:9092
-      TRANSACTIONS_TOPIC: queueing.transactions
-      LEGIT_TOPIC: streaming.transactions.legit
-      FRAUD_TOPIC: streaming.transactions.fraud
-
+    
+# NEW
 networks:
   default:
     external:
